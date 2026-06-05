@@ -267,7 +267,7 @@ function App() {
           </nav>
 
           <button className="cart-button" onClick={() => setIsCartOpen(true)}>
-            Cart <span>({totalCount})</span>
+            🛒 Cart <span>({totalCount})</span>
           </button>
         </div>
       </header>
