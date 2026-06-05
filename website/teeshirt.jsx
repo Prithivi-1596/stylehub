@@ -264,11 +264,7 @@ function App() {
 
           <nav className="nav-links">
             <button onClick={() => setCurrentPage("home")}>Home</button>
-            <button onClick={() => setCurrentPage("men")}>Men</button>
-            <button onClick={() => setCurrentPage("women")}>Women</button>
           </nav>
-
-
 
           <button className="cart-button" onClick={() => setIsCartOpen(true)}>
             Cart <span>({totalCount})</span>

@@ -62,8 +62,20 @@ button {
 }
 
 .brand {
-  font-size: 1.3rem;
-  font-weight: 800;
+  font-size: 1.45rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  padding: 10px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 107, 53, 0.16);
+  background: linear-gradient(90deg, rgba(255, 107, 53, 0.15), rgba(255, 255, 255, 0.2));
+  color: var(--accent);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.brand:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 30px rgba(255, 107, 53, 0.15);
 }
 
 .nav-links {
