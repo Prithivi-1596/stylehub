@@ -159,11 +159,6 @@ function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState("home");
   const [selectedType, setSelectedType] = useState(null);
-  const [authPanel, setAuthPanel] = useState(null);
-  const [authEmail, setAuthEmail] = useState("");
-  const [authPassword, setAuthPassword] = useState("");
-  const [authName, setAuthName] = useState("");
-  const [user, setUser] = useState(null);
 
   const totalCount = useMemo(() => {
     let sum = 0;
@@ -221,25 +216,6 @@ function App() {
     });
   };
 
-  const openAuthPanel = (panel) => {
-    setAuthPanel(panel);
-    setAuthEmail("");
-    setAuthPassword("");
-    setAuthName("");
-  };
-
-  const handleAuthSubmit = (event) => {
-    event.preventDefault();
-    const displayName = authPanel === "register" ? authName || authEmail : authEmail.split("@")[0];
-    setUser({ name: displayName });
-    setAuthPanel(null);
-  };
-
-  const logout = () => {
-    setUser(null);
-    setAuthPanel(null);
-  };
-
   const filteredProducts =
     currentPage === "home"
       ? products
@@ -283,7 +259,7 @@ function App() {
               setSelectedType(null);
             }}
           >
-            Style Hub
+            Style Hub Co.
           </button>
 
           <nav className="nav-links">
@@ -292,25 +268,7 @@ function App() {
             <button onClick={() => setCurrentPage("women")}>Women</button>
           </nav>
 
-          <div className="auth-actions">
-            {user ? (
-              <>
-                <span className="user-greeting">Hi, {user.name}</span>
-                <button className="btn btn-secondary" onClick={logout}>
-                  Logout
-                </button>
-              </>
-            ) : (
-              <>
-                <button className="btn btn-secondary" onClick={() => openAuthPanel("login")}>
-                  Login
-                </button>
-                <button className="btn btn-secondary" onClick={() => openAuthPanel("register")}>
-                  Register
-                </button>
-              </>
-            )}
-          </div>
+
 
           <button className="cart-button" onClick={() => setIsCartOpen(true)}>
             Cart <span>({totalCount})</span>
@@ -486,57 +444,6 @@ function App() {
           </button>
         </div>
       </aside>
-
-      {authPanel && (
-        <div className="auth-modal">
-          <div className="auth-panel">
-            <div className="auth-header">
-              <h2>{authPanel === "login" ? "Login" : "Register"}</h2>
-              <button className="close-cart" onClick={() => setAuthPanel(null)}>
-                ✕
-              </button>
-            </div>
-            <form className="auth-form" onSubmit={handleAuthSubmit}>
-              {authPanel === "register" && (
-                <label>
-                  Name
-                  <input
-                    type="text"
-                    value={authName}
-                    onChange={(event) => setAuthName(event.target.value)}
-                    placeholder="Your name"
-                    required
-                  />
-                </label>
-              )}
-              <label>
-                Email
-                <input
-                  type="email"
-                  value={authEmail}
-                  onChange={(event) => setAuthEmail(event.target.value)}
-                  placeholder="you@example.com"
-                  required
-                />
-              </label>
-              <label>
-                Password
-                <input
-                  type="password"
-                  value={authPassword}
-                  onChange={(event) => setAuthPassword(event.target.value)}
-                  placeholder="Password"
-                  required
-                />
-              </label>
-              <button type="submit" className="btn btn-primary btn-full">
-                {authPanel === "login" ? "Login" : "Create account"}
-              </button>
-            </form>
-          </div>
-          <div className="cart-backdrop open" onClick={() => setAuthPanel(null)} />
-        </div>
-      )}
 
       <div
         className={`cart-backdrop ${isCartOpen ? "open" : ""}`}
